@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #020617;
+        color: #fff;
+        overflow-x: hidden;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      .card {
+        background-color: #0f172a;
+        color: white;
+        border: 1px #1e293b solid;
+        border-radius: 1rem;
+      }
+      .chart-container {
+        height: 300px;
+      }
+
+      .sidebar {
+        background-color: #fff;
+        color: #000;
+        width: 250px;
+        height: 100vh;
+        padding: 1rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: transform 0.3s ease-in-out;
+        z-index: 40;
+      }
+
+      /* Sidebar hidden by default on mobile */
+      .sidebar-hidden {
+        transform: translateX(-100%);
+      }
+
+      /* Mobile overlay */
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 998;
+      }
+
+      /* Show overlay when sidebar is open */
+      .overlay.show {
+        display: block;
+      }
+
+      /* Desktop-specific overrides */
+      @media (min-width: 992px) {
+        .sidebar {
+          transform: none !important;
+        }
+
+        .overlay {
+          display: none !important;
+        }
+
+        .toggle-btn {
+          display: none;
+        }
+
+        .main-content {
+          margin-left: 250px;
+        }
+      }
+
+      /* Toggle button (hamburger icon) styling */
+      .toggle-btn {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Icons inside cards */
+      .icon-lg {
+        font-size: 1.5rem;
+      }
+    </style>
+    <style>
+      /*added style*/
+      .color-icon {
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        background: linear-gradient(130deg, #3b82f6, #9333ea);
+        box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
+          0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+
+      .icon-dark {
+        background-color: #3b82f61a;
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .text-grey {
+        color: #94a3b8;
+      }
+    </style>
+    <style>
+      /*pop styles*/
+      #pop-up-link,
+      #close-icon {
+        cursor: pointer;
+      }
+
+      #pop-up-block {
+        position: fixed;
+        top: 0;
+        z-index: 50;
+        background: #343a40e6;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+        overflow-y: scroll;
+        margin: 0;
+      }
+
+      #pop-up-block .row {
+        justify-content: center;
+      }
+
+      #pop-up-block .card {
+        padding: 20px;
+      }
+
+      .fa-xmark {
+        font-size: 26px;
+      }
+
+      #pop-up-block .display-flex-line {
+        justify-content: space-between;
+      }
+
+      svg > g > g.google-visualization-tooltip {
+        pointer-events: none;
+      }
+
+      .jc-block{
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container main-content" id="pop-up-block">
+      <div class="row pt-4">
+        <div class="card col-md-8 col-10">
+          <div class="d-flex align-items-center jc-block">
+            <h3 class="card-title">Introduction</h3>
+            <i class="fa-solid fa-xmark" id="close-icon"></i>
+          </div>
+          <p>
+            By accessing and using our website and services, you agree to comply
+            with these Terms &amp; Conditions (“Terms”). If you do not agree,
+            please refrain from using our services.
+          </p>
+          <h5 class="sub-title mt-4">Definitions</h5>
+          <p>
+            "Services" refers to the analytics and insights provided by our
+            platform. "User" refers to any individual or entity using our
+            platform.
+          </p>
+          <h5 class="sub-title mt-4">Use of Services</h5>
+          <p>
+            Our platform provides web analytics and insights based on publicly
+            available data and proprietary methodologies.
+          </p>
+          <p>
+            You agree not to misuse the data, attempt to reverse-engineer our
+            services, or use automated means to extract information without
+            permission.
+          </p>
+          <h5 class="sub-title mt-4">Data Accuracy &amp; Limitations</h5>
+          <p>
+            While we strive for accuracy, we do not guarantee that the data
+            provided is 100% precise. The analytics and reports generated are
+            for informational purposes only.
+          </p>
+          <h5 class="sub-title mt-4">Intellectual Property</h5>
+          <p>
+            All content, trademarks, and analytics provided on our platform are
+            our property or licensed to us. Users are not permitted to
+            reproduce, distribute, or use our content without authorization.
+          </p>
+          <h5 class="sub-title mt-4">Data Usage</h5>
+          <p>
+            By using our platform, you consent to data collection for improving
+            our services.
+          </p>
+          <h5 class="sub-title mt-4">Account &amp; Security</h5>
+          <p>We reserve the right to suspend or terminate accounts.</p>
+          <h5 class="sub-title mt-4">Limitation of Liability</h5>
+          <p>
+            We are not responsible for any loss or damages resulting from
+            reliance on our data or services. Our platform is provided "as is,"
+            without warranties of any kind.
+          </p>
+          <h5 class="sub-title mt-4">Third-Party Links &amp; Services</h5>
+          <p>
+            Our platform may contain links to third-party websites. We are not
+            responsible for their content or practices.
+          </p>
+          <h5 class="sub-title mt-4">Changes to Terms</h5>
+          <p>
+            We reserve the right to modify these Terms at any time. Continued
+            use of the platform after changes implies acceptance of the updated
+            Terms.
+          </p>
+          <h5 class="sub-title mt-4">Contact Us</h5>
+          <p>
+            For any questions regarding these Terms, please contact us at
+            support@amgtech.io
+          </p>
+          <p>
+            ©&nbsp;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            2025 &nbsp;Powered by AMGTECH LTD
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="sidebar" class="sidebar sidebar-hidden">
+      <h5 class="fw-bold d-flex align-items-center">
+        <i class="fas fa-chart-bar me-2 color-icon"></i> clikteria.com
+      </h5>
+      <small class="text-muted">Domain Analytics Overview</small>
+      <hr />
+      <ul class="nav flex-column mt-2">
+        <li class="nav-item mt-3 text-muted">Time Period</li>
+        <li class="nav-item"><a class="nav-link" href="#" id="btnD">Yesterday</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="btnW">Last Week</a></li>
+        <li class="nav-item"><a class="nav-link" href="#" id="btnM">Last Month</a></li>
+      </ul>
+      <div class="mt-auto small text-center text-muted pt-5">
+        <hr />
+        &copy; 2025 Powered by <br /><strong>AMGTECH LTD</strong><br />
+        <a href="#" class="text-decoration-none" id="pop-up-link">Terms & Conditions</a>
+      </div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Main Content -->
+    <div class="container-fluid">
+      <div class="d-flex align-items-center p-3">
+        <span class="toggle-btn text-white" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </span>
+        <h4 class="mb-0">clikteria.com</h4>
+      </div>
+
+      <div class="row" style="margin-left: 0; margin-right: 0">
+        <div class="col-lg-10 offset-lg-2">
+          <div class="row px-3">
+            <!-- Cards -->
+            <div class="col-12 col-md-6 col-xl-3 mb-3">
+              <div
+                class="card p-3 d-flex flex-row align-items-center justify-content-between"
+              >
+                <i
+                  class="fas fa-user icon-lg icon-dark"
+                  style="color: #60a5fa"
+                ></i>
+                <div class="text-end">
+                  <h4 class="mb-0 fw-bolder" id="total-visits-number">
+                    13,318
+                  </h4>
+                  <small class="text-grey">Total Visits</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-3">
+              <div
+                class="card p-3 d-flex flex-row align-items-center justify-content-between"
+              >
+                <i
+                  class="fas fa-clock icon-lg icon-dark"
+                  style="color: #34d399"
+                ></i>
+                <div class="text-end">
+                  <h4 class="mb-0 fw-bolder" id="time-title">00:08:20</h4>
+                  <small class="text-grey">Average Duration</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-3">
+              <div
+                class="card p-3 d-flex flex-row align-items-center justify-content-between"
+              >
+                <i
+                  class="fas fa-globe icon-lg icon-dark"
+                  style="color: #c084fc"
+                ></i>
+                <div class="text-end">
+                  <h4 class="mb-0 fw-bolder" id="mobile-distribution-span"></h4>
+                  <small class="text-grey">Mobile Traffic</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 mb-3">
+              <div
+                class="card p-3 d-flex flex-row align-items-center justify-content-between"
+              >
+                <i
+                  class="fas fa-chart-line icon-lg icon-dark"
+                  style="color: #fb923c"
+                ></i>
+                <div class="text-end">
+                  <h4 class="mb-0 fw-bolder" id="desktop-distribution-span"></h4>
+                  <small class="text-grey">Desktop Traffic</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="col-12 mb-3">
+              <div class="card p-3">
+                <h4 class="px-5">Visits Over Time</h4>
+                <small class="text-muted"
+                  >24-hour traffic pattern analysis</small
+                >
+                <div id="line_chart" class="chart-container mt-3"></div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="card p-3">
+                <h4 class="px-5">Traffic Channels</h4>
+                <div id="columnchart" class="chart-container mt-3"></div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="card p-3">
+                <h4 class="px-5">Geographical Distribution</h4>
+                <div id="geochart" class="chart-container mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("sidebar-hidden");
+        document.getElementById("overlay").classList.toggle("show");
+      }
+
+      /* google.charts.load("current", { packages: ["corechart", "bar"] });
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        const lineData = google.visualization.arrayToDataTable([
+          ["Hour", "Visits"],
+          ["00", 14],
+          ["01", 13],
+          ["02", 8],
+          ["03", 8],
+          ["04", 8],
+          ["05", 7],
+          ["06", 6],
+          ["07", 5],
+          ["08", 7],
+          ["09", 5],
+          ["10", 5],
+          ["11", 6],
+          ["12", 5],
+          ["13", 5],
+          ["14", 7],
+          ["15", 5],
+          ["16", 6],
+          ["17", 7],
+          ["18", 12],
+          ["19", 11],
+          ["20", 11],
+          ["21", 11],
+          ["22", 13],
+          ["23", 12],
+        ]);
+        const lineOptions = {
+          legend: "none",
+          backgroundColor: "#161b22",
+          colors: ["#4dabf7"],
+          hAxis: { textStyle: { color: "#fff" } },
+          vAxis: { textStyle: { color: "#fff" }, gridlines: { color: "#333" } },
+        };
+        new google.visualization.LineChart(
+          document.getElementById("line_chart")
+        ).draw(lineData, lineOptions);
+
+        const pieData = google.visualization.arrayToDataTable([
+          ["Channel", "Traffic"],
+          ["DisplayAds", 78],
+          ["Paid", 22],
+        ]);
+        const pieOptions = {
+          backgroundColor: "#161b22",
+          legend: { textStyle: { color: "#fff" } },
+          pieHole: 0.4,
+          colors: ["#4dabf7", "#a78bfa"],
+        };
+        new google.visualization.PieChart(
+          document.getElementById("pie_chart")
+        ).draw(pieData, pieOptions);
+
+        const barData = google.visualization.arrayToDataTable([
+          ["Country", "Traffic %"],
+          ["Spain", 21.76],
+          ["France", 19.48],
+          ["Italy", 12.28],
+          ["Switzerland", 8.94],
+          ["Romania", 6.89],
+          ["Germany", 5.1],
+        ]);
+        const barOptions = {
+          backgroundColor: "#161b22",
+          legend: "none",
+          hAxis: { textStyle: { color: "#fff" } },
+          vAxis: { textStyle: { color: "#fff" } },
+          colors: ["#4dabf7"],
+        };
+        new google.visualization.BarChart(
+          document.getElementById("bar_chart")
+        ).draw(barData, barOptions);
+      }*/
+    </script>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
