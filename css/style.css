@@ -7,12 +7,15 @@ body {
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
 }
+
 .card {
+  height: 100%;
   background-color: #0f172a;
   color: white;
   border: 1px #1e293b solid;
   border-radius: 1rem;
 }
+
 .chart-container {
   height: 300px;
 }

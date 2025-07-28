@@ -87,11 +87,10 @@
             support@amgtech.io
           </p>
           <p>
-            ©&nbsp;
-            <script>
+            ©&nbsp;<script>
               document.write(new Date().getFullYear());
             </script>
-            2025 &nbsp;Powered by AMGTECH LTD
+            &nbsp;Powered by AMGTECH LTD
           </p>
         </div>
       </div>
@@ -99,7 +98,7 @@
 
     <div id="sidebar" class="sidebar sidebar-hidden d-flex flex-column">
       <h5 class="fw-bold d-flex align-items-center">
-        <i class="fas fa-chart-bar me-2 color-icon"></i> clikteria.com
+        <i class="fas fa-chart-bar me-2 color-icon"></i> clikterria.com
       </h5>
       <small class="text-muted">Domain Analytics Overview</small>
       <hr />
@@ -132,7 +131,9 @@
 
       <div class="mt-auto small text-center text-muted pt-5">
         <hr />
-        &copy; 2025 Powered by <br /><strong>AMGTECH LTD</strong><br />
+        &copy;&nbsp;<script>
+          document.write(new Date().getFullYear());
+        </script>&nbsp;Powered by <br /><strong>AMGTECH LTD</strong><br />
         <a href="#" class="text-decoration-none text-muted" id="pop-up-link"
           >Terms & Conditions</a
         >
@@ -148,7 +149,7 @@
         <span class="toggle-btn text-white" onclick="toggleSidebar()">
           <i class="fas fa-bars"></i>
         </span>
-        <h4 class="mb-0">clikteria.com</h4>
+        <h4 class="mb-0">clikterria.com</h4>
       </div>
 
       <div class="row" style="margin-left: 0; margin-right: 0">
@@ -190,7 +191,7 @@
                 class="card p-3 d-flex flex-row align-items-center justify-content-between"
               >
                 <i
-                  class="fas fa-globe icon-lg icon-dark"
+                  class="fas fa-mobile icon-lg icon-dark"
                   style="color: #c084fc"
                 ></i>
                 <div class="text-end">
@@ -204,7 +205,7 @@
                 class="card p-3 d-flex flex-row align-items-center justify-content-between"
               >
                 <i
-                  class="fas fa-chart-line icon-lg icon-dark"
+                  class="fas fa-solid fa-laptop icon-lg icon-dark"
                   style="color: #fb923c"
                 ></i>
                 <div class="text-end">
@@ -221,15 +222,19 @@
             <div class="col-12 mb-3">
               <div class="card p-3">
                 <h4 class="px-5">Visits Over Time</h4>
-                <small class="text-muted"
-                  >24-hour traffic pattern analysis</small
-                >
-                <div id="line_chart" class="chart-container mt-3"></div>
+                <p class="px-5 text-grey">
+                  This chart displays the trend of visits over the selected
+                  time period
+                </p>
+                <div id="line_chart" class="chart-container mt-3" style="letter-spacing: 2px !important;"></div>
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <div class="card p-3">
                 <h4 class="px-5">Traffic Channels</h4>
+                <p class="px-5 text-grey">
+                  Overview of traffic sources within the selected time frame
+                </p>
                 <div id="columnchart" class="chart-container mt-3"></div>
               </div>
             </div>

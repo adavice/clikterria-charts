@@ -144,7 +144,7 @@ async function drawLineChart(period) {
                     color: '#444'
                 },
                 baselineColor: '#777',
-                textStyle: { fontSize: 14, color: "#fff" },
+                textStyle: { fontSize: 14, color: "#fff",  },
                 titleTextStyle: { fontSize: 14, color: "#fff" }
             },
             vAxis: {
