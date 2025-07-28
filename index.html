@@ -11,157 +11,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       rel="stylesheet"
     />
-    <style>
-      body {
-        background-color: #020617;
-        color: #fff;
-        overflow-x: hidden;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-      }
-      .card {
-        background-color: #0f172a;
-        color: white;
-        border: 1px #1e293b solid;
-        border-radius: 1rem;
-      }
-      .chart-container {
-        height: 300px;
-      }
+    <link
+      rel="stylesheet"
+      href="css/style.css"/>
 
-      .sidebar {
-        background-color: #fff;
-        color: #000;
-        width: 250px;
-        height: 100vh;
-        padding: 1rem;
-        position: fixed;
-        top: 0;
-        left: 0;
-        transition: transform 0.3s ease-in-out;
-        z-index: 40;
-      }
-
-      /* Sidebar hidden by default on mobile */
-      .sidebar-hidden {
-        transform: translateX(-100%);
-      }
-
-      /* Mobile overlay */
-      .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 998;
-      }
-
-      /* Show overlay when sidebar is open */
-      .overlay.show {
-        display: block;
-      }
-
-      /* Desktop-specific overrides */
-      @media (min-width: 992px) {
-        .sidebar {
-          transform: none !important;
-        }
-
-        .overlay {
-          display: none !important;
-        }
-
-        .toggle-btn {
-          display: none;
-        }
-
-        .main-content {
-          margin-left: 250px;
-        }
-      }
-
-      /* Toggle button (hamburger icon) styling */
-      .toggle-btn {
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-
-      /* Icons inside cards */
-      .icon-lg {
-        font-size: 1.5rem;
-      }
-    </style>
-    <style>
-      /*added style*/
-      .color-icon {
-        color: #fff;
-        padding: 10px;
-        border-radius: 10px;
-        background: linear-gradient(130deg, #3b82f6, #9333ea);
-        box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000,
-          0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      }
-
-      .icon-dark {
-        background-color: #3b82f61a;
-        padding: 15px;
-        border-radius: 10px;
-      }
-
-      .text-grey {
-        color: #94a3b8;
-      }
-    </style>
-    <style>
-      /*pop styles*/
-      #pop-up-link,
-      #close-icon {
-        cursor: pointer;
-      }
-
-      #pop-up-block {
-        position: fixed;
-        top: 0;
-        z-index: 50;
-        background: #343a40e6;
-        height: 100%;
-        width: 100%;
-        max-width: 100%;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.3s;
-        overflow-y: scroll;
-        margin: 0;
-      }
-
-      #pop-up-block .row {
-        justify-content: center;
-      }
-
-      #pop-up-block .card {
-        padding: 20px;
-      }
-
-      .fa-xmark {
-        font-size: 26px;
-      }
-
-      #pop-up-block .display-flex-line {
-        justify-content: space-between;
-      }
-
-      svg > g > g.google-visualization-tooltip {
-        pointer-events: none;
-      }
-
-      .jc-block{
-        justify-content: space-between;
-      }
-    </style>
   </head>
   <body>
     <div class="container main-content" id="pop-up-block">
@@ -244,22 +97,45 @@
       </div>
     </div>
 
-    <div id="sidebar" class="sidebar sidebar-hidden">
+    <div id="sidebar" class="sidebar sidebar-hidden d-flex flex-column">
       <h5 class="fw-bold d-flex align-items-center">
         <i class="fas fa-chart-bar me-2 color-icon"></i> clikteria.com
       </h5>
       <small class="text-muted">Domain Analytics Overview</small>
       <hr />
-      <ul class="nav flex-column mt-2">
+      <ul class="nav flex-column mt-2 gap-2">
         <li class="nav-item mt-3 text-muted">Time Period</li>
-        <li class="nav-item"><a class="nav-link" href="#" id="btnD">Yesterday</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="btnW">Last Week</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" id="btnM">Last Month</a></li>
+        <li class="nav-item">
+          <a class="nav-link text-muted active" href="#" id="btnD"
+            ><i class="fa-solid fa-clock"></i>Yesterday</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="#" id="btnW"
+            ><i class="fa-solid fa-calendar"></i>Last Week</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="#" id="btnM"
+            ><i class="fa-solid fa-chart-line"></i>Last Month</a
+          >
+        </li>
       </ul>
+      <hr />
+      <ul class="nav flex-column mt-2 gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-muted" onclick="saveAsPDF()">
+            <i class="fa-solid fa-download"></i>Download
+          </a>
+        </li>
+      </ul>
+
       <div class="mt-auto small text-center text-muted pt-5">
         <hr />
         &copy; 2025 Powered by <br /><strong>AMGTECH LTD</strong><br />
-        <a href="#" class="text-decoration-none" id="pop-up-link">Terms & Conditions</a>
+        <a href="#" class="text-decoration-none text-muted" id="pop-up-link"
+          >Terms & Conditions</a
+        >
       </div>
     </div>
 
@@ -268,7 +144,7 @@
 
     <!-- Main Content -->
     <div class="container-fluid">
-      <div class="d-flex align-items-center p-3">
+      <div class="d-flex align-items-center p-3 gap-4">
         <span class="toggle-btn text-white" onclick="toggleSidebar()">
           <i class="fas fa-bars"></i>
         </span>
@@ -332,7 +208,10 @@
                   style="color: #fb923c"
                 ></i>
                 <div class="text-end">
-                  <h4 class="mb-0 fw-bolder" id="desktop-distribution-span"></h4>
+                  <h4
+                    class="mb-0 fw-bolder"
+                    id="desktop-distribution-span"
+                  ></h4>
                   <small class="text-grey">Desktop Traffic</small>
                 </div>
               </div>

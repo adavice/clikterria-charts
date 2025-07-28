@@ -1,1 +1,66 @@
-{"channelsOverview":{"paid":13,"displayAds":87},"alerts":null,"alert_events":{},"visitDuration":[{"visits":14.4,"hour":"00:00"},{"visits":13.36,"hour":"01:00"},{"visits":6.2,"hour":"02:00"},{"visits":7.11,"hour":"03:00"},{"visits":6.57,"hour":"04:00"},{"visits":7.27,"hour":"05:00"},{"visits":6.1,"hour":"06:00"},{"visits":6.57,"hour":"07:00"},{"visits":6.37,"hour":"08:00"},{"visits":8.41,"hour":"09:00"},{"visits":6.5,"hour":"10:00"},{"visits":6.46,"hour":"11:00"},{"visits":6.2,"hour":"12:00"},{"visits":7.04,"hour":"13:00"},{"visits":7,"hour":"14:00"},{"visits":6.19,"hour":"15:00"},{"visits":6.63,"hour":"16:00"},{"visits":5.83,"hour":"17:00"},{"visits":11.1,"hour":"18:00"},{"visits":12.93,"hour":"19:00"},{"visits":13.43,"hour":"20:00"},{"visits":14.19,"hour":"21:00"},{"visits":11.9,"hour":"22:00"},{"visits":13.04,"hour":"23:00"}],"timeOnSite":8.78,"deviceDistribution":{"desktop":14,"mobile":86},"top_performers":[{"amount":20.4809869672926,"name":"HU - New Steps CCS gc"},{"amount":12.2885921803756,"name":"FI - Easy Empty Green Prefill CCS gc"},{"amount":10.2404934836463,"name":"IT - Pastel One Step CCS pf"},{"amount":6.82699292496594,"name":"DE - Payment Blank CCS gc"}],"totals":{"start_time":"1742853600","total_payout":"1,993.60","dist":{"FI":{"clicks":627,"pixels":10,"click_dist":4,"pixel_dist":9},"DE":{"clicks":591,"pixels":12,"click_dist":3,"pixel_dist":11},"SE":{"clicks":166,"pixels":4,"click_dist":1,"pixel_dist":3},"UK":{"clicks":169,"pixels":0,"click_dist":1,"pixel_dist":0},"IE":{"clicks":237,"pixels":1,"click_dist":1,"pixel_dist":0},"SI":{"clicks":345,"pixels":5,"click_dist":2,"pixel_dist":4},"RO":{"clicks":760,"pixels":2,"click_dist":4,"pixel_dist":1},"CH":{"clicks":365,"pixels":1,"click_dist":2,"pixel_dist":0},"PT":{"clicks":270,"pixels":3,"click_dist":1,"pixel_dist":2},"ES":{"clicks":4012,"pixels":5,"click_dist":25,"pixel_dist":4},"FR":{"clicks":4386,"pixels":6,"click_dist":28,"pixel_dist":5}},"payout_type":"Payout","data_type":"Campaign","end_time":"1742939999","graph_link":"adv/report","total_impressions":"15,466","total_pixels":102,"offset":60}}
+{
+  "channelsOverview": { "paid": 13, "displayAds": 87 },
+  "alerts": null,
+  "alert_events": {},
+  "visitDuration": [
+    { "visits": 14.4, "hour": "00:00" },
+    { "visits": 13.36, "hour": "01:00" },
+    { "visits": 6.2, "hour": "02:00" },
+    { "visits": 7.11, "hour": "03:00" },
+    { "visits": 6.57, "hour": "04:00" },
+    { "visits": 7.27, "hour": "05:00" },
+    { "visits": 6.1, "hour": "06:00" },
+    { "visits": 6.57, "hour": "07:00" },
+    { "visits": 6.37, "hour": "08:00" },
+    { "visits": 8.41, "hour": "09:00" },
+    { "visits": 6.5, "hour": "10:00" },
+    { "visits": 6.46, "hour": "11:00" },
+    { "visits": 6.2, "hour": "12:00" },
+    { "visits": 7.04, "hour": "13:00" },
+    { "visits": 7, "hour": "14:00" },
+    { "visits": 6.19, "hour": "15:00" },
+    { "visits": 6.63, "hour": "16:00" },
+    { "visits": 5.83, "hour": "17:00" },
+    { "visits": 11.1, "hour": "18:00" },
+    { "visits": 12.93, "hour": "19:00" },
+    { "visits": 13.43, "hour": "20:00" },
+    { "visits": 14.19, "hour": "21:00" },
+    { "visits": 11.9, "hour": "22:00" },
+    { "visits": 13.04, "hour": "23:00" }
+  ],
+  "timeOnSite": 8.78,
+  "deviceDistribution": { "desktop": 14, "mobile": 86 },
+  "top_performers": [
+    { "amount": 20.4809869672926, "name": "HU - New Steps CCS gc" },
+    {
+      "amount": 12.2885921803756,
+      "name": "FI - Easy Empty Green Prefill CCS gc"
+    },
+    { "amount": 10.2404934836463, "name": "IT - Pastel One Step CCS pf" },
+    { "amount": 6.82699292496594, "name": "DE - Payment Blank CCS gc" }
+  ],
+  "totals": {
+    "start_time": "1742853600",
+    "total_payout": "1,993.60",
+    "dist": {
+      "FI": { "clicks": 627, "pixels": 10, "click_dist": 4, "pixel_dist": 9 },
+      "DE": { "clicks": 591, "pixels": 12, "click_dist": 3, "pixel_dist": 11 },
+      "SE": { "clicks": 166, "pixels": 4, "click_dist": 1, "pixel_dist": 3 },
+      "UK": { "clicks": 169, "pixels": 0, "click_dist": 1, "pixel_dist": 0 },
+      "IE": { "clicks": 237, "pixels": 1, "click_dist": 1, "pixel_dist": 0 },
+      "SI": { "clicks": 345, "pixels": 5, "click_dist": 2, "pixel_dist": 4 },
+      "RO": { "clicks": 760, "pixels": 2, "click_dist": 4, "pixel_dist": 1 },
+      "CH": { "clicks": 365, "pixels": 1, "click_dist": 2, "pixel_dist": 0 },
+      "PT": { "clicks": 270, "pixels": 3, "click_dist": 1, "pixel_dist": 2 },
+      "ES": { "clicks": 4012, "pixels": 5, "click_dist": 25, "pixel_dist": 4 },
+      "FR": { "clicks": 4386, "pixels": 6, "click_dist": 28, "pixel_dist": 5 }
+    },
+    "payout_type": "Payout",
+    "data_type": "Campaign",
+    "end_time": "1742939999",
+    "graph_link": "adv/report",
+    "total_impressions": "15,466",
+    "total_pixels": 102,
+    "offset": 60
+  }
+}

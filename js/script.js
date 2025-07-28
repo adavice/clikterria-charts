@@ -4,9 +4,7 @@ const pageElements = {
     closeIcon: document.getElementById("close-icon"),
     totalVisits: document.getElementById("total-visits-number"),
     timeTitle: document.getElementById("time-title"),
-    legendDiv: document.getElementById("legend-div"),
     lineChart: document.getElementById("line_chart"),
-    pieChart: document.getElementById("piechart"),
     columnChart: document.getElementById("columnchart"),
     geoChart: document.getElementById("geochart")
 };
@@ -58,10 +56,15 @@ function getCountryName(countryCode) {
     return countryMapping[countryCode.toLowerCase()] || countryCode.toUpperCase();
 }
 
-function toggleActiveMode(buttonId) {
-    document.querySelectorAll(".btn-custom-mode, .btn-custom")
-        .forEach(btn => btn.classList.remove("active"));
-    document.getElementById(buttonId).classList.add("active");
+function toggleActiveMode(activeButtonId) {
+    document.querySelectorAll("#btnD, #btnW, #btnM").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    const activeButton = document.getElementById(activeButtonId);
+    if (activeButton) {
+        activeButton.classList.add("active");
+    }
 }
 
 let currentJsonFile = 'day.json';
@@ -87,7 +90,7 @@ const createTooltipColumn = (dataTable) => ({
     role: 'tooltip',
     properties: { html: true },
     calc: function (dt, row) {
-        return `<div style="font-family: Arial, sans-serif; font-size: 14px; padding:5px">
+        return `<div style="font-family: Arial, sans-serif; font-size: 14px; padding:5px; color: #1f2937;">
             <b>${dt.getValue(row, 0)}</b> ${dt.getValue(row, 1)}%</div>`;
     }
 });
@@ -126,7 +129,7 @@ async function drawLineChart(period) {
             type: 'string',
             role: 'tooltip',
             properties: { html: true },
-            calc: (dt, row) => `<div style="padding:5px; font-family: Arial, sans-serif; font-size: 14px; width: 80px;">
+            calc: (dt, row) => `<div style="padding:5px; font-family: Arial, sans-serif; font-size: 14px; width: 80px; color: #1f2937;">
                 <b>${dt.getValue(row, 0)}</b></div>`
         }]);
 
@@ -138,24 +141,26 @@ async function drawLineChart(period) {
                 title: config.title,
                 gridlines: {
                     count: config.gridlines,
-                    color: '#333'
+                    color: '#444'
                 },
-                baselineColor: '#ddd',
-                textStyle: { fontSize: 12, color: "#fff" }
+                baselineColor: '#777',
+                textStyle: { fontSize: 14, color: "#fff" },
+                titleTextStyle: { fontSize: 14, color: "#fff" }
             },
             vAxis: {
                 title: 'Visits',
                 viewWindow: { min: 0 },
-                gridlines: { color: '#333' },
-                baselineColor: '#ddd',
-                textStyle: { fontSize: 12, color: "#fff" }
+                gridlines: { color: '#444' },
+                baselineColor: '#777',
+                textStyle: { fontSize: 14, color: "#fff" },
+                titleTextStyle: { fontSize: 14, color: "#fff" }
             },
             chartArea: { width: '90%', height: '80%' },
             lineWidth: 2,
             backgroundColor: "#0f172a",
             colors: ["#4dabf7"],
-
         };
+        
 
         const chart = new google.visualization.LineChart(pageElements.lineChart);
         chart.draw(view, options);
@@ -175,7 +180,6 @@ async function drawCharts() {
             pageElements.totalVisits.textContent = totalClicks.toLocaleString();
         }
 
-        // Device distribution into separate spans
         const { mobile, desktop } = jsonData.deviceDistribution;
         const mobileSpan = document.getElementById("mobile-distribution-span");
         const desktopSpan = document.getElementById("desktop-distribution-span");
@@ -187,7 +191,6 @@ async function drawCharts() {
             desktopSpan.textContent = `${desktop.toFixed(1)}%`;
         }
 
-        // Channel distribution pie chart (replacing column chart)
         const channelData = [
             ['Channel', 'Percentage'],
             ['DisplayAds', jsonData.channelsOverview.displayAds],
@@ -200,7 +203,7 @@ async function drawCharts() {
 
         const pieChart = new google.visualization.PieChart(pageElements.columnChart);
         pieChart.draw(pieView, {
-            colors: ['#6a98f6', '#3366cc'],
+            colors: ['#4dabf7', '#3366cc'],
             tooltip: {
                 isHtml: true,
                 textStyle: { fontSize: 14 },
@@ -209,19 +212,18 @@ async function drawCharts() {
             legend: {
                 position: 'bottom',
                 textStyle: {
-                    fontSize: 12,
-                    color: 'black'
+                    fontSize: 14,
+                    color: '#fff'
                 }
             },
-            fontSize: 14
+            fontSize: 14,
+            backgroundColor: "#0f172a"
         });
 
-
-        // BarChart (horizontal) showing country name + value on the bar
         const barDataTable = new google.visualization.DataTable();
-        barDataTable.addColumn('string', 'Country');          // for positioning
-        barDataTable.addColumn('number', 'Percentage');       // for bar size
-        barDataTable.addColumn({ type: 'string', role: 'annotation' });  // show label on bar
+        barDataTable.addColumn('string', 'Country');
+        barDataTable.addColumn('number', 'Percentage');
+        barDataTable.addColumn({ type: 'string', role: 'annotation' });
 
         Object.entries(jsonData.totals.dist).forEach(([countryCode, data]) => {
             const percentage = (data.clicks / totalClicks) * 100;
@@ -236,20 +238,23 @@ async function drawCharts() {
             hAxis: {
                 title: 'Click %',
                 minValue: 0,
-                textStyle: { fontSize: 12, color: "#fff" },
-                format: '#\'%\''
+                textStyle: { fontSize: 14, color: "#fff" },
+                format: '#\'%\'',
+                gridlines: { color: 'transparent' },
+                baselineColor: 'transparent'
             },
             vAxis: {
                 title: '',
-                textStyle: { fontSize: 12, color: "#fff" },
-                gridlines: { color: '#333' }
+                textStyle: { fontSize: 14, color: "#fff" },
+                gridlines: { color: 'transparent' },
+                baselineColor: 'transparent'
             },
             chartArea: { width: '85%', height: '90%' },
             backgroundColor: "#0f172a",
             colors: ["#4dabf7"],
             annotations: {
                 textStyle: {
-                    fontSize: 12,
+                    fontSize: 14,
                     color: '#ffffff',
                     auraColor: 'none'
                 },
@@ -257,68 +262,12 @@ async function drawCharts() {
             },
             tooltip: { trigger: 'none' }
         });
-
-
+        
     } catch (error) {
         console.error('Error in drawCharts:', error);
     }
 }
 
-
-
-
-async function updateLegendTable() {
-    try {
-        const jsonData = await fetchJsonData(currentJsonFile);
-        const totalClicks = Object.values(jsonData.totals.dist)
-            .reduce((sum, country) => sum + country.clicks, 0);
-
-        pageElements.legendDiv.innerHTML = '';
-
-        const legendData = Object.entries(jsonData.totals.dist)
-            .map(([countryCode, data]) => [
-                getCountryName(countryCode),
-                data.clicks,
-                (data.clicks / totalClicks) * 100
-            ])
-            .sort((a, b) => b[1] - a[1]);
-
-        const columnsContainer = document.createElement('div');
-        columnsContainer.style.display = 'flex';
-        columnsContainer.style.justifyContent = 'space-between';
-        columnsContainer.style.gap = '40px';
-        pageElements.legendDiv.appendChild(columnsContainer);
-
-        const [leftColumn, rightColumn] = [document.createElement('div'), document.createElement('div')];
-        const middleIndex = Math.ceil(legendData.length / 2);
-        const [leftData, rightData] = [legendData.slice(0, middleIndex), legendData.slice(middleIndex)];
-
-        const createLegendItems = (data, column) => {
-            data.forEach(item => {
-                const legendItem = document.createElement('div');
-                legendItem.className = 'legend-item';
-
-                const countryDiv = document.createElement('div');
-                countryDiv.className = 'legend-country';
-                countryDiv.textContent = item[0];
-
-                const clicksDiv = document.createElement('div');
-                clicksDiv.className = 'legend-percentage';
-                clicksDiv.textContent = `${item[2].toFixed(2)}%`;
-
-                legendItem.append(countryDiv, clicksDiv);
-                column.appendChild(legendItem);
-            });
-        };
-
-        createLegendItems(leftData, leftColumn);
-        createLegendItems(rightData, rightColumn);
-        columnsContainer.append(leftColumn, rightColumn);
-
-    } catch (error) {
-        console.error('Error updating legend table:', error);
-    }
-}
 async function setTimeOnSite() {
     try {
         const jsonData = await fetchJsonData(currentJsonFile);
@@ -333,7 +282,6 @@ async function setTimeOnSite() {
 
 function updateAllCharts() {
     drawCharts();
-    updateLegendTable();
 }
 
 google.charts.setOnLoadCallback(async () => {
@@ -342,7 +290,6 @@ google.charts.setOnLoadCallback(async () => {
 
         await drawLineChart('daily');
         await drawCharts();
-        await updateLegendTable();
         await setTimeOnSite();
 
         toggleActiveMode('btnD');
@@ -351,7 +298,7 @@ google.charts.setOnLoadCallback(async () => {
     }
 });
 
-/*
+
 function saveAsPDF() {
     const { jsPDF } = window.jspdf;
 
@@ -399,4 +346,4 @@ function saveAsPDF() {
         console.error('Error generating PDF:', error);
         alert('There was an error generating the PDF. Please try again.');
     });
-}*/
+}
