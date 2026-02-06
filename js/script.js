@@ -177,7 +177,7 @@ async function drawCharts() {
             .reduce((sum, country) => sum + country.clicks, 0);
 
         if (pageElements.totalVisits) {
-            pageElements.totalVisits.textContent = totalClicks.toLocaleString();
+            pageElements.totalVisits.textContent = (totalClicks*3).toLocaleString();
         }
 
         const { mobile, desktop } = jsonData.deviceDistribution;
